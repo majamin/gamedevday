@@ -1,11 +1,380 @@
 <!DOCTYPE html>
-<html>
-<head><title>Class Materials</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Dev Day Art Resources — Imagine High</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f6f1;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #6b6560;
+      --accent: #2d5a3d;
+      --accent-light: #e8f0eb;
+      --border: #e5e0da;
+      --border-hover: #c8c1b8;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
+      --radius: 12px;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Subtle grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 56px 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .header-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .header-description {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 540px;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 48px;
+      animation: fadeUp 0.5s ease-out both;
+    }
+
+    section:nth-child(2) { animation-delay: 0.1s; }
+    section:nth-child(3) { animation-delay: 0.15s; }
+    section:nth-child(4) { animation-delay: 0.2s; }
+    section:nth-child(5) { animation-delay: 0.25s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.35rem;
+      margin-bottom: 20px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .icon {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* File cards */
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .file-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .file-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .file-card:active {
+      transform: translateY(0);
+    }
+
+    .file-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .file-icon.img  { background: #fef3e2; color: #c67a1a; }
+    .file-icon.ase  { background: #e8e2f6; color: #6b4fa0; }
+    .file-icon.pdf  { background: #fce4e4; color: #b94040; }
+    .file-icon.zip  { background: #e2eef8; color: #3a6fa0; }
+    .file-icon.doc  { background: #e2f4ed; color: #2d7a54; }
+    .file-icon.misc { background: #f0eeeb; color: #7a7168; }
+
+    .file-info {
+      min-width: 0;
+    }
+
+    .file-name {
+      font-weight: 500;
+      font-size: 0.92rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .file-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* Image preview cards */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .image-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .image-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .image-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #f0eeeb;
+    }
+
+    .image-card .file-info {
+      padding: 12px 14px;
+    }
+
+    /* Notice bar */
+    .notice {
+      background: var(--accent-light);
+      border: 1px solid #c8ddd0;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .notice strong {
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0 48px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header { padding: 36px 0 28px; margin-bottom: 32px; }
+      section { margin-bottom: 36px; }
+      .file-grid { grid-template-columns: 1fr; }
+      .image-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    }
+  </style>
+</head>
 <body>
-  <h1>Game Dev Resources</h1>
-  <ul>
-    <li><a href="character_template.aseprite">Character Sprite Template (Aseprite)</a></li>
-  </ul>
+
+  <div class="container">
+    <header>
+      <div class="header-eyebrow"><a href="https://imagine.sd33.bc.ca/">Imagine High Secondary School</a></div>
+      <h1>Game Dev Day Art Resources</h1>
+      <p class="header-description">
+        Download sprites, reference images, and project files right here!
+        Click any file to download.
+      </p>
+    </header>
+
+    <main>
+      <!-- Optional notice — delete this block if you don't need it -->
+      <div class="notice">
+        <span>📌</span>
+        <span><strong>Note:</strong> Right-click and "Save As" if files open in your browser instead of downloading.</span>
+      </div>
+
+      <!-- ============================================
+           SECTION: Sprites & Aseprite Files
+           To add a file, copy a <a class="file-card"> block
+           and update the href, name, and meta text.
+           ============================================ -->
+      <section>
+        <h2>Sprites &amp; Other Things</h2>
+        <div class="file-grid">
+
+          <a class="file-card" href="character_template.aseprite" download>
+            <div class="file-icon ase">ASE</div>
+            <div class="file-info">
+              <div class="file-name">character_template.aseprite</div>
+              <div class="file-meta">Character Template Animation</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================
+           SECTION: Reference Images
+           For images, you can use image-card with a
+           preview, or file-card for simple download links.
+           ============================================ -->
+      <section>
+        <h2>Reference Images</h2>
+          <div class="image-grid">
+
+            <a class="image-card" href="images/141-Female_Walk_Dummy_Long.png" download>
+              <img src="images/141-Female_Walk_Dummy_Long.png" alt="Cell diagram reference" loading="lazy">
+              <div class="file-info">
+                <div class="file-name">141-Female_Walk_Dummy_Long.png</div>
+                <div class="file-meta">Female Walk Template</div>
+              </div>
+            </a>
+
+            <a class="image-card" href="images/QQGCoL.gif" download>
+              <img src="images/QQGCoL.gif" alt="Cell diagram reference" loading="lazy">
+              <div class="file-info">
+                <div class="file-name">QQGCoL.gif</div>
+                <div class="file-meta">2D Pixel Art Template by ZeggyGames</div>
+              </div>
+            </a>
+
+          </div>
+      </section>
+
+      <!-- ============================================
+           SECTION: Documents
+           ============================================ -->
+      <!-- <section> -->
+      <!--   <h2><span class="icon">📄</span> Documents</h2> -->
+      <!--   <div class="file-grid"> -->
+      <!---->
+      <!--     <a class="file-card" href="docs/project-rubric.pdf" download> -->
+      <!--       <div class="file-icon pdf">PDF</div> -->
+      <!--       <div class="file-info"> -->
+      <!--         <div class="file-name">project-rubric.pdf</div> -->
+      <!--         <div class="file-meta">Super Mitosis Bros rubric</div> -->
+      <!--       </div> -->
+      <!--     </a> -->
+      <!---->
+      <!--     <a class="file-card" href="docs/aseprite-guide.pdf" download> -->
+      <!--       <div class="file-icon pdf">PDF</div> -->
+      <!--       <div class="file-info"> -->
+      <!--         <div class="file-name">aseprite-guide.pdf</div> -->
+      <!--         <div class="file-meta">Getting started with Aseprite</div> -->
+      <!--       </div> -->
+      <!--     </a> -->
+      <!---->
+      <!--   </div> -->
+      <!-- </section> -->
+
+    </main>
+
+    <footer>
+        <p><a href="https://imagine.sd33.bc.ca/">Imagine High Secondary School</a> — Game Development Program</p>
+    </footer>
+  </div>
+
 </body>
 </html>
-
